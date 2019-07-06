@@ -1,4 +1,4 @@
-package jp.org.web;
+package jp.org.web.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
