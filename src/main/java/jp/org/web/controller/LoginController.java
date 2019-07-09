@@ -38,12 +38,15 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String doLogin(LoginForm loginForm) {
 		logger.info("Login - doLogin start");
-		logger.info("loginId -> " + loginForm.getLoginId());
+		logger.info("loginId  -> " + loginForm.getLoginId());
+		logger.info("password -> " + loginForm.getPassword());
 		
 		String ret = "login";
 		if(loginForm.getLoginId().equals("abc") && loginForm.getPassword().equals("def")) {
+			logger.info("Login OK, Next Page is home");
 			ret = "home";
 		} else {
+			logger.info("Login NG, Back loin page");
 			loginForm.setLoginId("");
 			loginForm.setPassword("");
 		}
