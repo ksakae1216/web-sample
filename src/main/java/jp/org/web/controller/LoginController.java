@@ -42,7 +42,7 @@ public class LoginController {
 		logger.info("password -> " + loginForm.getPassword());
 		
 		String ret = "login";
-		if(loginForm.getLoginId().equals("abc") && loginForm.getPassword().equals("def")) {
+		if(loginForm.getLoginId().equals("abc") && loginForm.getPassword().equals("ddd")) {
 			logger.info("Login OK, Next Page is home");
 			ret = "home";
 		} else {
