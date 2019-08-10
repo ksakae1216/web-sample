@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jp.org.web.form.LoginForm;
 import jp.org.web.repository.LoginRepository;
 
+
 /**
  * Handles requests for the application home page.
  */
@@ -51,7 +52,7 @@ public class LoginController {
 		// DBから取得
 		String loginResult = loginRepository.getUserMap(loginForm.getLoginId(), loginForm.getPassword());
 		
-		if(!loginResult.equals("")) {
+		if(loginResult != null) {
 			logger.info("Login OK, Next Page is home");
 			ret = "home";
 		} else {
