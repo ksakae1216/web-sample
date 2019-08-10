@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.org.web.form.LoginForm;
+import jp.org.web.repository.LoginRepository;
 
 /**
  * Handles requests for the application home page.
@@ -19,6 +21,9 @@ import jp.org.web.form.LoginForm;
 public class LoginController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
+	@Autowired
+	private LoginRepository loginRepository;
 	
 	@ModelAttribute
 	public LoginForm setLoginForm() {
@@ -42,7 +47,11 @@ public class LoginController {
 		logger.info("password -> " + loginForm.getPassword());
 		
 		String ret = "login";
-		if(loginForm.getLoginId().equals("abc") && loginForm.getPassword().equals("eee")) {
+		
+		// DBから取得
+		String loginResult = loginRepository.getUserMap(loginForm.getLoginId(), loginForm.getPassword());
+		
+		if(!loginResult.equals("")) {
 			logger.info("Login OK, Next Page is home");
 			ret = "home";
 		} else {
