@@ -2,18 +2,18 @@ package jp.org.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jp.org.web.form.LessonListForm;
 import jp.org.web.form.LoginForm;
+import jp.org.web.repository.LessonListRepository;
 import jp.org.web.repository.LoginRepository;
 
 
@@ -25,6 +25,9 @@ public class ListController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ListController.class);
 	
+	@Autowired
+	private LessonListRepository repository;
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -32,18 +35,9 @@ public class ListController {
 	public String home(Model model) {
 		logger.info("List screen display");
 		
-		List<LoginForm> listList = new ArrayList<>();
-		LoginForm loginForm = new LoginForm();
-		LoginForm loginForm2 = new LoginForm();
-		loginForm.setLoginId("sakae");
-		loginForm.setPassword("pass");
-		loginForm2.setLoginId("hogehoge");
-		loginForm2.setPassword("fumufumu");
-
-		listList.add(loginForm);
-		listList.add(loginForm2);
-		
-		model.addAttribute("listForms", listList);
+		// DBから取得
+		List<LessonListForm> lessonListForm = repository.getLessonList();
+		model.addAttribute("lessonList", lessonListForm);
 		
 		return "01_list/list";
 	}

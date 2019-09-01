@@ -13,21 +13,25 @@
 </head>
 
 <body>
-	<form:form modelAttribute="listForms">
+	<form:form modelAttribute="lessonList">
 		<table class="table">
 		  <thead>
 		    <tr>
-		      <th scope="col">First</th>
-		      <th scope="col">Last</th>
-		      <th scope="col">Handle</th>
+		      <th scope="col">userId</th>
+		      <th scope="col">userFirstName</th>
+		      <th scope="col">userLastName</th>
+		      <th scope="col">lesson1st</th>
+		      <th scope="col">lesson2nd</th>
 		    </tr>
 		  </thead>
 		  <tbody>
-			<c:forEach items="${listForms}" var="listRow" varStatus="status">
+			<c:forEach items="${lessonList}" var="listRow" varStatus="status">
 		    <tr>
-				<td>${listRow.loginId}</td>
-				<td>${listRow.password}</td>
-				<td>@mdo</td>
+				<td>${listRow.userId}</td>
+				<td>${listRow.userFirstName}</td>
+				<td>${listRow.userLastName}</td>
+				<td>${listRow.lesson1st}</td>
+				<td>${listRow.lesson2nd}</td>
 		    </tr>
 			</c:forEach>
 		  </tbody>
