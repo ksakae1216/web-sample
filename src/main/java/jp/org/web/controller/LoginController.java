@@ -54,7 +54,7 @@ public class LoginController {
 		
 		if(loginResult != null) {
 			logger.info("Login OK, Next Page is home");
-			ret = "home";
+			ret = "redirect:/01_list/list";
 		} else {
 			logger.info("Login NG, Back loin page");
 			loginForm.setLoginId("");
