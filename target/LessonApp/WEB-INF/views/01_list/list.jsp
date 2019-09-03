@@ -8,34 +8,64 @@
   <meta charset="UTF-8">
   <title>list</title>
   <link rel="stylesheet" href="resources/style.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
+  <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+  	<script type="text/javascript">
+ 		$(document).ready(function ($) {
+ 			$.extend( $.fn.dataTable.defaults, {
+ 				language: {
+ 				url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+ 				}
+			});
+ 			
+			$('#dtDynamicVerticalScrollExample').DataTable({
+				"scrollY": "260px",
+				"scrollCollapse": true,
+			});
+			$('.dataTables_length').addClass('bs-select');
+		});
+ 	</script>
   
 </head>
 
 <body>
 	<form:form modelAttribute="lessonList">
-		<table class="table">
-		  <thead>
-		    <tr>
-		      <th scope="col">userId</th>
-		      <th scope="col">userFirstName</th>
-		      <th scope="col">userLastName</th>
-		      <th scope="col">lesson1st</th>
-		      <th scope="col">lesson2nd</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-			<c:forEach items="${lessonList}" var="listRow" varStatus="status">
-		    <tr>
-				<td>${listRow.userId}</td>
-				<td>${listRow.userFirstName}</td>
-				<td>${listRow.userLastName}</td>
-				<td>${listRow.lesson1st}</td>
-				<td>${listRow.lesson2nd}</td>
-		    </tr>
-			</c:forEach>
-		  </tbody>
-		</table>
+		<div class="container-fluid">
+		<div class="row">
+			<div class="col" style="display: flex; justify-content: flex-end;">
+				<input type="submit" name="logout" class="btn btn-primary" value="ログアウト"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<table id="dtDynamicVerticalScrollExample" class="datatables table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+				  <thead>
+				    <tr>
+				      <th scope="col">userId</th>
+				      <th scope="col">userFirstName</th>
+				      <th scope="col">userLastName</th>
+				      <th scope="col">lesson1st</th>
+				      <th scope="col">lesson2nd</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+					<c:forEach items="${lessonList}" var="listRow" varStatus="status">
+				    <tr>
+						<td>${listRow.userId}</td>
+						<td>${listRow.userFirstName}</td>
+						<td>${listRow.userLastName}</td>
+						<td>${listRow.lesson1st}</td>
+						<td>${listRow.lesson2nd}</td>
+				    </tr>
+					</c:forEach>
+				  </tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+	
 	 </form:form>
 
 
