@@ -42,4 +42,10 @@ public class ListController {
 		return "01_list/list";
 	}
 
+	@RequestMapping(value = "/01_list/list", params="logout", method = RequestMethod.POST)
+	public String doLogout(Model model) {
+		logger.info("Do logout and transfer login screen");
+		
+		return "redirect:/login";
+	}
 }
