@@ -52,7 +52,7 @@
 				  <tbody>
 					<c:forEach items="${lessonList}" var="listRow" varStatus="status">
 				    <tr>
-						<td>${listRow.userId}</td>
+				    	<td><a href="/web/02_update/update/${listRow.userId}" target="_self">${listRow.userId}</a></td>
 						<td>${listRow.userFirstName}</td>
 						<td>${listRow.userLastName}</td>
 						<td>${listRow.lesson1st}</td>
