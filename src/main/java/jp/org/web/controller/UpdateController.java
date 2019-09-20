@@ -1,5 +1,6 @@
 package jp.org.web.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.org.web.form.LessonListForm;
 import jp.org.web.form.LoginForm;
-import jp.org.web.repository.LoginRepository;
+import jp.org.web.repository.LessonListRepository;
 
 
 /**
@@ -26,13 +27,14 @@ public class UpdateController {
 	private static final Logger logger = LoggerFactory.getLogger(UpdateController.class);
 	
 	@Autowired
-	private LoginRepository loginRepository;
+	private LessonListRepository repository;
 	
 	@ModelAttribute
-	public LoginForm setLoginForm() {
-		LoginForm loginForm = new LoginForm();
-		return loginForm;
+	public LessonListForm setLessonListForm() {
+		LessonListForm lessonListForm = new LessonListForm();
+		return lessonListForm;
 	}
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -41,12 +43,19 @@ public class UpdateController {
 		logger.info("Update screen display");
 		logger.info("userId -> " + id);
 		
-		LessonListForm listForm = new LessonListForm(); 
-		listForm.setUserId(id);
-		model.addAttribute("lessonListForm", listForm);
+		LessonListForm lessonDataForm = repository.getLessonData(id);
+		model.addAttribute("lessonListForm", lessonDataForm);
 		
 		return "/02_update/update";
 	}
 
+	@RequestMapping(value = "/02_update/update/{id}", method = RequestMethod.POST)
+	public String updateData(@PathVariable String id, Model model, LessonListForm lessonListForm) {
+		logger.info("update data");
+		
+		repository.update(lessonListForm.getUserFirstName(), lessonListForm.getUserLastName(), lessonListForm.getLesson1st(), lessonListForm.getLesson2nd(), id);
+		
+		return "/02_update/update";
+	}
 
 }
