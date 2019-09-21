@@ -12,23 +12,26 @@
 </head>
 
 <body>  
-	<form:form modelAttribute="lessonListForm">
-		${lessonListForm.userId}
-		<form:input path="userId"/>
-	
-		<form:button>更新</form:button>
-	</form:form>
-	
 	<!-- Default form contact -->
-<form class="text-center border border-light p-5" action="#!">
+<form:form modelAttribute="lessonListForm" class="text-center border border-light p-5" action="#!">
 
-    <p class="h4 mb-4">Contact us</p>
+	<p class="h4 mb-4 bg-info text-white rounded">Update user: ${lessonListForm.userId}</p>
 
-    <!-- Name -->
-    <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name">
+    <!-- FirstName -->
+    <label>FirstName</label>
+    <form:input path="userFirstName" class="form-control mb-4" placeholder="FirstName"/>
 
-    <!-- Email -->
-    <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail">
+    <!-- LastName -->
+    <label>LastName</label>
+    <form:input path="userLastName" class="form-control mb-4" placeholder="LastName"/>
+
+    <!-- Lesson1st -->
+    <label>Lesson1st</label>
+    <form:input path="lesson1st" class="form-control mb-4" placeholder="Lesson1st"/>
+
+    <!-- Lesson2nd -->
+    <label>Lesson2nd</label>
+    <form:input path="lesson2nd" class="form-control mb-4" placeholder="Lesson2nd"/>
 
     <!-- Subject -->
     <label>Subject</label>
@@ -51,10 +54,11 @@
         <label class="custom-control-label" for="defaultContactFormCopy">Send me a copy of this message</label>
     </div>
 
-    <!-- Send button -->
-    <button class="btn btn-info btn-block" type="submit">Send</button>
+    <!-- 更新 -->
+    <form:button class="btn btn-info btn-block">更新</form:button>
 
-</form>
+	<form:hidden path="userId"/>
+</form:form>
 <!-- Default form contact -->
 </body>
 
