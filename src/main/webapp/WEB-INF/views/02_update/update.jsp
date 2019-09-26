@@ -27,32 +27,18 @@
 
     <!-- Lesson1st -->
     <label>Lesson1st</label>
-    <form:input path="lesson1st" class="form-control mb-4" placeholder="Lesson1st"/>
+    <form:select path="lesson1st" cssClass="browser-default custom-select mb-4">
+   		<form:options items="${languageForm}" itemValue="language" itemLabel="language"/>
+	</form:select>
 
     <!-- Lesson2nd -->
     <label>Lesson2nd</label>
-    <form:input path="lesson2nd" class="form-control mb-4" placeholder="Lesson2nd"/>
+    <form:select path="lesson2nd" cssClass="browser-default custom-select mb-4">
+   		<form:options items="${languageForm}" itemValue="language" itemLabel="language"/>
+	</form:select>
 
-    <!-- Subject -->
-    <label>Subject</label>
-    <select class="browser-default custom-select mb-4">
-        <option value="" disabled>Choose option</option>
-        <option value="1" selected>Feedback</option>
-        <option value="2">Report a bug</option>
-        <option value="3">Feature request</option>
-        <option value="4">Feature request</option>
-    </select>
-
-    <!-- Message -->
-    <div class="form-group">
-        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Message"></textarea>
-    </div>
-
-    <!-- Copy -->
-    <div class="custom-control custom-checkbox mb-4">
-        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy">
-        <label class="custom-control-label" for="defaultContactFormCopy">Send me a copy of this message</label>
-    </div>
+	<form:checkbox path="deleteFlg"/>
+	<form:label path="">このIDを削除</form:label>
 
     <!-- 更新 -->
     <form:button class="btn btn-info btn-block">更新</form:button>
