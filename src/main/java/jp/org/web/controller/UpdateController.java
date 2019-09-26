@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jp.org.web.form.LanguageForm;
 import jp.org.web.form.LessonListForm;
 import jp.org.web.form.LoginForm;
+import jp.org.web.repository.LanguageRepository;
 import jp.org.web.repository.LessonListRepository;
 
 
@@ -27,7 +29,10 @@ public class UpdateController {
 	private static final Logger logger = LoggerFactory.getLogger(UpdateController.class);
 	
 	@Autowired
-	private LessonListRepository repository;
+	private LessonListRepository lessonListRepository;
+	
+	@Autowired
+	private LanguageRepository languageRepository;
 	
 	@ModelAttribute
 	public LessonListForm setLessonListForm() {
@@ -43,8 +48,11 @@ public class UpdateController {
 		logger.info("Update screen display");
 		logger.info("userId -> " + id);
 		
-		LessonListForm lessonDataForm = repository.getLessonData(id);
+		LessonListForm lessonDataForm = lessonListRepository.getLessonData(id);
 		model.addAttribute("lessonListForm", lessonDataForm);
+		
+		List<LanguageForm> languageForm = languageRepository.getLanguageList();
+		model.addAttribute("languageForm", languageForm);
 		
 		return "/02_update/update";
 	}
@@ -53,9 +61,13 @@ public class UpdateController {
 	public String updateData(@PathVariable String id, Model model, LessonListForm lessonListForm) {
 		logger.info("update data");
 		
-		repository.update(lessonListForm.getUserFirstName(), lessonListForm.getUserLastName(), lessonListForm.getLesson1st(), lessonListForm.getLesson2nd(), id);
+		if(lessonListForm.isDeleteFlg()) {
+			lessonListRepository.delete(id);
+		} else {
+			lessonListRepository.update(lessonListForm.getUserFirstName(), lessonListForm.getUserLastName(), lessonListForm.getLesson1st(), lessonListForm.getLesson2nd(), id);
+		}
 		
-		return "/02_update/update";
+		return "redirect:/01_list/list";
 	}
 
 }
