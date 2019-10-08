@@ -11,6 +11,8 @@
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
   <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   	<script type="text/javascript">
  		$(document).ready(function ($) {
  			$.extend( $.fn.dataTable.defaults, {
@@ -24,6 +26,21 @@
 				"scrollCollapse": true,
 			});
 			$('.dataTables_length').addClass('bs-select');
+			
+			const type = location.search;
+			if(type.length != 0) {
+				let message = '更新';
+				const typeSplit = type.split('=');
+				if(typeSplit[1] == 'delete') {
+					message = '削除';
+				}
+				toastr.options = {
+						"positionClass": "toast-top-center",
+						"timeOut": "2000"
+				}
+				toastr.info(message + 'が完了しました');
+			}
+
 		});
  	</script>
   

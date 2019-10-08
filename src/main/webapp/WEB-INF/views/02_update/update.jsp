@@ -9,6 +9,16 @@
   <title>update</title>
   <link rel="stylesheet" href="resources/style.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+	$(function() {
+			$("input[name='userFirstName']").focus(function (){
+				$("input[name='userFirstName']").addClass('bg-primary text-white');
+			});
+		});
+	
+	</script>
+  
 </head>
 
 <body>  
