@@ -1,6 +1,5 @@
 package jp.org.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.org.web.form.LessonListForm;
-import jp.org.web.form.LoginForm;
 import jp.org.web.repository.LessonListRepository;
-import jp.org.web.repository.LoginRepository;
 
 
 /**
