@@ -1,6 +1,5 @@
 package jp.org.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.org.web.form.LessonListForm;
-import jp.org.web.form.LoginForm;
 import jp.org.web.repository.LessonListRepository;
-import jp.org.web.repository.LoginRepository;
 
 
 /**
@@ -40,6 +37,13 @@ public class ListController {
 		model.addAttribute("lessonList", lessonListForm);
 		
 		return "01_list/list";
+	}
+	
+	@RequestMapping(value = "/01_list/list", params="addRow", method = RequestMethod.POST)
+	public String doAddRow(Model model) {
+		logger.info("Do transfer update screen and add row");
+		
+		return "redirect:/02_update/update/addRow";
 	}
 
 	@RequestMapping(value = "/01_list/list", params="logout", method = RequestMethod.POST)
