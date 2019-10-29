@@ -7,11 +7,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.org.web.form.LoginForm;
+import jp.org.web.message.LoginMessage;
 import jp.org.web.repository.LoginRepository;
 
 
@@ -42,12 +45,17 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String doLogin(LoginForm loginForm) {
+	public String doLogin(@Validated LoginForm loginForm, BindingResult result) {
 		logger.info("Login - doLogin start");
 		logger.info("loginId  -> " + loginForm.getLoginId());
 		logger.info("password -> " + loginForm.getPassword());
 		
 		String ret = "login";
+		
+		// 入力チェック
+		if(result.hasErrors()) {
+			return ret;
+		}
 		
 		// DBから取得
 		String loginResult = loginRepository.getUserMap(loginForm.getLoginId(), loginForm.getPassword());
@@ -59,6 +67,7 @@ public class LoginController {
 			logger.info("Login NG, Back loin page");
 			loginForm.setLoginId("");
 			loginForm.setPassword("");
+			loginForm.setErrorMessage(LoginMessage.idPassUnmach);
 		}
 
 		logger.info("Login - doLogin stop");
