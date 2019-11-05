@@ -2,6 +2,7 @@ package jp.org.web.controller;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.org.web.form.LanguageForm;
 import jp.org.web.form.LessonListForm;
@@ -47,11 +54,21 @@ public class UpdateController {
 	public String home(Locale locale, Model model, @PathVariable String id) {
 		logger.info("Update screen display");
 		logger.info("userId -> " + id);
-		
+
 		LessonListForm lessonDataForm = lessonListRepository.getLessonData(id);
-		model.addAttribute("lessonListForm", lessonDataForm);
-		
 		List<LanguageForm> languageForm = languageRepository.getLanguageList();
+		
+		Optional<String> information1 = this.getLanguageInformation(lessonDataForm.getLesson1st(), languageForm);
+		Optional<String> information2 = this.getLanguageInformation(lessonDataForm.getLesson2nd(), languageForm);
+
+		// 値があるときだけ下記の処理実施
+//		information1.ifPresent(x -> {
+//			lessonDataForm.setInformation1st(x);
+//		});
+		lessonDataForm.setInformation1st(information1.get());
+		lessonDataForm.setInformation2nd(information2.get());
+		
+		model.addAttribute("lessonListForm", lessonDataForm);
 		model.addAttribute("languageForm", languageForm);
 		
 		return "/02_update/update";
@@ -72,6 +89,22 @@ public class UpdateController {
 		
 		return "/02_update/update";
 	}
+	
+	@RequestMapping(value = "/02_update/update/getInformation", method = RequestMethod.GET)
+	@ResponseBody
+	public String getInformation(@RequestParam("language") String language) throws JsonMappingException, JsonProcessingException {
+		logger.info("Start getInformation");
+
+		LanguageForm languageForm = languageRepository.getlanguageInfo(language);		
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String ret = mapper.writeValueAsString(languageForm);
+
+		logger.info("End getInformation");
+
+		return ret;
+	}
+
 
 	@RequestMapping(value = "/02_update/update/{path}", method = RequestMethod.POST)
 	public String updateData(@PathVariable String path, Model model, LessonListForm lessonListForm, RedirectAttributes attr) {
@@ -106,6 +139,14 @@ public class UpdateController {
 		}
 		
 		return newRowId;
+	}
+	
+	private Optional<String> getLanguageInformation(String language, List<LanguageForm> languageForm) {
+		Optional<String> information = languageForm.stream()
+										.filter(x -> x.getLanguage().equals(language))
+										.map(x -> x.getInformation()).findFirst();
+		
+		return information;
 	}
 
 }

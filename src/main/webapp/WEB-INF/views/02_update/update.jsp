@@ -20,6 +20,47 @@
  			if($('input:hidden[name="insertFlg"]').val() == 'true') {
  				$('[name=submitButton]:input').text('新規登録');
  			}
+ 			
+ 		 	$(function() {
+ 	 		    $("select").change(function() {
+ 	 		    	getAsyncInformation(this);
+ 	 		    });
+ 	 		});
+
+ 	 		function getAsyncInformation(selectObj) {
+ 		    	let obj = $(selectObj).next("input");
+ 			    console.log($(selectObj).val());
+ 			    console.log(obj.val());
+
+  		        $.ajax({
+ 		            type        : "GET",
+ 		            url         : "/web/02_update/update/getInformation",
+ 		            data        : {language: $(selectObj).val()},
+ 		            dataType    : "json",
+ 		            success     : function(data) {
+ 		                            success(data, obj);
+ 		                        },
+ 		            error       : function(XMLHttpRequest, textStatus, errorThrown) {
+ 		                            error(XMLHttpRequest, textStatus, errorThrown);
+ 		                        }
+ 		        });
+
+  		 		// Ajax通信成功時処理
+   		 		function success(data, obj) {
+  		 		    //console.table(data);
+  		 		    console.log(data.information);
+  		 		    obj.val(data.information);
+  		 		}
+  		 		 
+  		 		// Ajax通信失敗時処理
+   		 		function error(XMLHttpRequest, textStatus, errorThrown) {
+  		 			console.log("error:" + XMLHttpRequest);
+  		 			console.log("status:" + textStatus);
+  		 			console.log("errorThrown:" + errorThrown);
+  		 		}
+
+ 	 		}
+
  		});
 
 	});
@@ -47,12 +88,14 @@
     <form:select path="lesson1st" cssClass="browser-default custom-select mb-4">
    		<form:options items="${languageForm}" itemValue="language" itemLabel="language"/>
 	</form:select>
+	<form:input path="information1st" class="form-control mb-4"/>
 
     <!-- Lesson2nd -->
     <label>Lesson2nd</label>
     <form:select path="lesson2nd" cssClass="browser-default custom-select mb-4">
    		<form:options items="${languageForm}" itemValue="language" itemLabel="language"/>
 	</form:select>
+	<form:input path="information2nd" class="form-control mb-4"/>
 
 	<form:checkbox path="deleteFlg"/>
 	<form:label path="">このIDを削除</form:label>
