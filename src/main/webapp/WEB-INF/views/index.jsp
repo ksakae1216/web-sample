@@ -281,8 +281,8 @@
         </div>
       </div>
       <div class="inner">
-        <div class="copyright">Copyright&copy;KOTARO SAKAE. All Rights Reserved.</>
-        </div>
+        <div class="copyright">Copyright&copy;KOTARO SAKAE. All Rights Reserved.</div>
+      </div>
     </footer>
   </div>
 
