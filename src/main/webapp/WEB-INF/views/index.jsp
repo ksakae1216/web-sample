@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
   <meta property='og:type' content='website'>
-  <meta property='og:title' content='WebデザイナーTARO YAMADA ポートフォリオ'>
+  <meta property='og:title' content='ポートフォリオ'>
   <meta property='og:url' content='URLが入る'>
   <meta property='og:description' content='Webデザイナー TARO YAMADAのポートフォリオサイトです！'>
   <meta property="og:image" content="resources/img/ogp.png">
