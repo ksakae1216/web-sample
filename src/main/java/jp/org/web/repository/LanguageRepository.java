@@ -10,10 +10,10 @@ import jp.org.web.form.LanguageForm;
 
 @Component
 public interface LanguageRepository {
-	@Select("select * from samurai_language")
+	@Select("select * from language")
 	List<LanguageForm> getlanguage();
 
-	@Select("select * from samurai_language where language=#{selLanguage}")
+	@Select("select * from language where language=#{selLanguage}")
 	LanguageForm getlanguageInfo(@Param("selLanguage") String selLanguage);
 
 }

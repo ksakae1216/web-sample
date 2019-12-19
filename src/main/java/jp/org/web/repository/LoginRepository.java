@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface LoginRepository {
-	@Select("select loginId from samurai_login where loginId=#{id} and password=#{pass}")
+	@Select("select loginId from login where loginId=#{id} and password=#{pass}")
 	String getUserMap(@Param("id") String loginId, @Param("pass") String password);
 }
