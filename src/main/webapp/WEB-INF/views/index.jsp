@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
   <meta property='og:type' content='website'>
-  <meta property='og:title' content='WebデザイナーTARO YAMADA ポートフォリオ'>
+  <meta property='og:title' content='ポートフォリオ'>
   <meta property='og:url' content='URLが入る'>
-  <meta property='og:description' content='Webデザイナー TARO YAMADAのポートフォリオサイトです！'>
+  <meta property='og:description' content='ポートフォリオサイトです！'>
   <meta property="og:image" content="resources/img/ogp.png">
-  <meta name="description" content="Webデザイナー TARO YAMADAのポートフォリオサイトです！" />
-  <title>Webデザイナー TARO YAMADA ポートフォリオ</title>
+  <meta name="description" content="ポートフォリオサイトです！" />
+  <title>ポートフォリオ</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet">
   <link href="resources/css/reset.css" media="all" rel="stylesheet" type="text/css" />
   <link href="resources/css/photoswipe/photoswipe.css" media="all" rel="stylesheet" type="text/css" />
@@ -281,8 +281,8 @@
         </div>
       </div>
       <div class="inner">
-        <div class="copyright">Copyright&copy;TARO YAMADA. All Rights Reserved.</>
-        </div>
+        <div class="copyright">Copyright&copy;KOTARO SAKAE. All Rights Reserved.</div>
+      </div>
     </footer>
   </div>
 
